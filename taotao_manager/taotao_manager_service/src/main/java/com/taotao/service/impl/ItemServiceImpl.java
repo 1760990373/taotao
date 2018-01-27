@@ -53,8 +53,8 @@ public class ItemServiceImpl implements ItemService {
         tbItem.setStatus((byte) 1);
         tbItem.setCreated(new Date());
         tbItem.setUpdated(new Date());
-        //向商品表插入数据
-        tbItemMapper.insert(tbItem);
+        //向商品表插入数据(如果为空就不插入)
+        tbItemMapper.insertSelective(tbItem);
         //创建TbItemDesc对象
         TbItemDesc tbItemDesc = new TbItemDesc();
         //补全TbItemDesc属性
@@ -62,8 +62,8 @@ public class ItemServiceImpl implements ItemService {
         tbItemDesc.setItemDesc(desc);
         tbItemDesc.setCreated(new Date());
         tbItemDesc.setUpdated(new Date());
-        //向商品描述表插入数据
-        tbItemDescMapper.insert(tbItemDesc);
+        //向商品描述表插入数据(如果为空就不插入)
+        tbItemDescMapper.insertSelective(tbItemDesc);
         //返回
         return TaotaoResult.ok();
     }

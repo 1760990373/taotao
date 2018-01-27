@@ -16,7 +16,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     <!-- 加载配置文件 -->
-    <context:property-placeholder location="classpath:resource/*.properties" />
+    <context:property-placeholder location="classpath:resource/*.properties"/>
 
     <!--配置多媒体文件上传解析器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -35,6 +35,9 @@
     <dubbo:reference interface="com.taotao.service.TestService" id="testService" timeout="10000"/>
     <dubbo:reference interface="com.taotao.service.ItemService" id="itemService" timeout="10000"/>
     <dubbo:reference interface="com.taotao.service.ItemCatService" id="itemCatService" timeout="10000"/>
+    <dubbo:reference interface="com.taotao.content.service.ContentService" id="contentService" timeout="10000"/>
+    <dubbo:reference interface="com.taotao.content.service.ContentCategoryService" id="contentCategoryService"
+                     timeout="10000"/>
 
 </beans>
 
