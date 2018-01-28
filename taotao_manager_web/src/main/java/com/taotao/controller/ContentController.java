@@ -26,4 +26,6 @@ public class ContentController {
     public TaotaoResult saveContent(TbContent tbContent){
         return contentService.saveContent(tbContent);
     }
+
+
 }
