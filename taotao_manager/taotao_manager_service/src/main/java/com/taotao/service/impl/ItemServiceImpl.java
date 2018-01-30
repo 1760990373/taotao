@@ -67,4 +67,9 @@ public class ItemServiceImpl implements ItemService {
         //返回
         return TaotaoResult.ok();
     }
+
+    @Override
+    public TbItem getTbItemById(Long id) {
+        return tbItemMapper.selectByPrimaryKey(id);
+    }
 }

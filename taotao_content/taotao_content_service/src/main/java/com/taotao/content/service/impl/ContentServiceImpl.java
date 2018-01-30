@@ -58,6 +58,9 @@ public class ContentServiceImpl implements ContentService {
         tbContent.setUpdated(new Date());
         //调用方法
         tbContentMapper.insertSelective(tbContent);
+        //缓存同步
+        jedisClient.hdel(TB_CONTENT_KEY, tbContent.getCategoryId().toString());
+        logger.info("缓存同步");
         return TaotaoResult.ok();
     }
 
@@ -67,7 +70,7 @@ public class ContentServiceImpl implements ContentService {
         //判断redis是否存在该缓存
         //如果有,直接返回
         try {
-            String stringJson = jedisClient.hget(TB_CONTENT_KEY, categoryId + "");
+            String stringJson = jedisClient.hget(TB_CONTENT_KEY, categoryId.toString());
             if (StringUtils.isNotBlank(stringJson)) {
                 //返回不为空,证明存在
                 logger.info("已经有了缓存");
@@ -82,8 +85,7 @@ public class ContentServiceImpl implements ContentService {
         example.createCriteria().andCategoryIdEqualTo(categoryId);
         List<TbContent> list = tbContentMapper.selectByExample(example);
         try {
-            jedisClient.hset(TB_CONTENT_KEY, categoryId + "", JsonUtils.objectToJson(list));
-            System.out.println("添加了缓存");
+            jedisClient.hset(TB_CONTENT_KEY, categoryId.toString(), JsonUtils.objectToJson(list));
             logger.info("添加了缓存");
         } catch (Exception e) {
             e.printStackTrace();

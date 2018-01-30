@@ -36,6 +36,12 @@
 	         		<li data-options="attributes:{'url':'content'}">内容管理</li>
 	         	</ul>
          	</li>
+         	<li>
+         		<span>网站搜索管理</span>
+         		<ul>
+	         		<li data-options="attributes:{'url':'indexSearchManager'}">搜索管理</li>
+	         	</ul>
+         	</li>
          </ul>
     </div>
     <div data-options="region:'center',title:''">
