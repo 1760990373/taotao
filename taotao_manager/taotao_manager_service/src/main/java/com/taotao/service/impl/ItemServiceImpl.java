@@ -72,4 +72,21 @@ public class ItemServiceImpl implements ItemService {
     public TbItem getTbItemById(Long id) {
         return tbItemMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public void deleteTbItemById(Long id) {
+        tbItemMapper.deleteByPrimaryKey(id);
+        tbItemDescMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void updateTbItem(TbItem tbItem, String desc) {
+        tbItemMapper.updateByPrimaryKeySelective(tbItem);
+        TbItemDesc tbItemDesc = new TbItemDesc();
+        tbItemDesc.setItemId(tbItem.getId());
+        tbItemDesc.setItemDesc(desc);
+        tbItemDesc.setCreated(new Date());
+        tbItemDesc.setUpdated(new Date());
+        tbItemDescMapper.updateByPrimaryKeySelective(tbItemDesc);
+    }
 }
